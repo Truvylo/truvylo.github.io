@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Truvylo TikTok Authorization</title>
+</head>
+<body style="font-family:Arial;background:#f7f7f7;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0">
+  <div style="background:#fff;max-width:720px;width:92%;padding:32px;border-radius:18px;box-shadow:0 10px 35px rgba(0,0,0,.12)">
+    <h1>TikTok authorization received</h1>
+    <p>Copy the authorization code below and paste it into the Truvylo TikTok Sandbox Bot.</p>
+
+    <textarea id="code" rows="4" readonly style="width:100%;box-sizing:border-box;padding:12px"></textarea>
+
+    <p>
+      <button onclick="navigator.clipboard.writeText(document.getElementById('code').value)" style="padding:12px 18px">
+        Copy authorization code
+      </button>
+    </p>
+
+    <p id="status"></p>
+
+    <script>
+      const p = new URLSearchParams(location.search);
+      const c = p.get('code') || '';
+
+      document.getElementById('code').value = c;
+
+      document.getElementById('status').textContent =
+        p.get('error')
+          ? ('Authorization error: ' + p.get('error'))
+          : (c ? 'Authorization successful.' : 'No authorization code was received.');
+    </script>
+  </div>
+</body>
+</html>
